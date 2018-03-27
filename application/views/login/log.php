@@ -8,16 +8,16 @@
   <body>
     <p class="lul">halo halo</p>
     </form>
-    <form class="form_login" action="<?php echo base_url(); ?>Login/aksi_login" method="post">
+    <form class="form_login" action="<?php echo base_url('Login/aksi_login'); ?>" method="post">
       <div>
         <input type="text" name="username" value="" placeholder="username">
-        <span class="text-danger"><?php  echo form_error('username') ?>
+        <span class="text-danger"><?php echo form_error('username') ?>
       </div>
       <div class="">
         <input type="password" name="password" value="" placeholder="password">
         <span class="text-danger"><?php echo form_error('password') ?>
       </div>
-  
+
       <input type="submit" value="submit">
     </form>
   </body>
