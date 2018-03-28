@@ -9,6 +9,7 @@
     {
       $this->db->where('username', $uname);
       $this->db->where('password', $pwd);
+      $this->db->where('jabatan', 'radiologi');
       $query = $this->db->get('admin');
 
       if ($query->num_rows()>0) {

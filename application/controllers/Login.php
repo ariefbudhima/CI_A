@@ -8,7 +8,7 @@ class login extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->library('form_validation');
 
-		$this->load->model('M_dokter');
+		$this->load->model('M_Laborat');
 		$this->load->model('M_radiologi');
 		// load semua model untuk dilakukan pengecekan pada database
 	}
@@ -21,22 +21,23 @@ class login extends CI_Controller {
 	public function aksi_login(){
 		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('password', 'password', 'required');
+
 		if ($this->form_validation->run()) {
 			$uname = $this->input->post('username');
 			$pwd = $this->input->post('password');
-
-
-			if ($this->M_dokter->can_login($uname, $pwd)) {
-				$session_data = array('uname' => $uname);
-				$this->session->set_userdata($session_data);
-				redirect(base_url('Login/Dokter'));
+			// var_dump($this->M_Laborat->can_login($uname, $pwd));
+			$getData = $this->M_Laborat->can_login($uname, $pwd);
+			if ($getData->num_rows() > 0) {
+					// $session_data = array('uname' => $uname);
+				$this->session->set_userdata('username',$uname);
+				redirect(base_url('Login/Laborat'));
 			}
 			elseif ($this->M_radiologi->can_login($uname, $pwd)) {
-				$session_data = array('uname' => $uname);
-				$this->session->set_userdata($session_data);
-				$username = $this->session->userdata('username');
+				// $session_data = array('uname' => $uname);
+				// $this->session->set_userdata($session_data);
+				$this->session->set_userdata('username',$uname);
 				//Pass it in an array to your view like
-				$data['username']=$username;
+				// $data['username']=$username;
 				// $this->load->view('test',$data);
 
 				redirect(base_url('Login/Radio'));
@@ -51,13 +52,14 @@ class login extends CI_Controller {
 			redirect(base_url('Login'));
 				// $this->load->view('login/log');
     }
+
 	}
-	public function Dokter(){
-		$this->load->view('login/masuk');
+	public function Laborat(){
+		$this->load->view('login/v_Laborat');
 	}
 
 	public function Radio(){
-		$this->load->view('login/v_RMasuk');
+		$this->load->view('login/v_Radio');
 	}
 
 	public function Logout(){
