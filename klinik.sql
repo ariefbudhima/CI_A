@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2018 at 08:07 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.3
+-- Generation Time: Mar 28, 2018 at 11:09 AM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `klinik`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `jabatan` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `jabatan`) VALUES
+(1, 'admin', 'admin', 'laboratorium'),
+(2, 'radio', 'radio', 'radiologi');
 
 -- --------------------------------------------------------
 
@@ -42,8 +63,6 @@ CREATE TABLE `apoteker` (
 
 CREATE TABLE `dokter` (
   `idDokter` varchar(25) NOT NULL,
-  `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
   `nmDokter` varchar(100) NOT NULL,
   `gender` varchar(15) NOT NULL,
   `Alamat` varchar(150) NOT NULL
@@ -53,9 +72,9 @@ CREATE TABLE `dokter` (
 -- Dumping data for table `dokter`
 --
 
-INSERT INTO `dokter` (`idDokter`, `username`, `password`, `nmDokter`, `gender`, `Alamat`) VALUES
-('ADM', 'admin', 'admin', 'namanya admin', 'Laki-Laki', 'Bandung'),
-('SMG', 'Sumanang', 'Sumanang', 'Sumanang', 'Laki-Laki', 'Bandung');
+INSERT INTO `dokter` (`idDokter`, `nmDokter`, `gender`, `Alamat`) VALUES
+('ADM', 'namanya admin', 'Laki-Laki', 'Bandung'),
+('SMG', 'Sumanang', 'Laki-Laki', 'Bandung');
 
 -- --------------------------------------------------------
 
@@ -243,6 +262,12 @@ CREATE TABLE `resep` (
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `apoteker`
 --
 ALTER TABLE `apoteker`
@@ -252,8 +277,7 @@ ALTER TABLE `apoteker`
 -- Indexes for table `dokter`
 --
 ALTER TABLE `dokter`
-  ADD PRIMARY KEY (`idDokter`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD PRIMARY KEY (`idDokter`);
 
 --
 -- Indexes for table `kategori`
@@ -311,6 +335,16 @@ ALTER TABLE `rekammedis`
 --
 ALTER TABLE `resep`
   ADD PRIMARY KEY (`idResep`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
