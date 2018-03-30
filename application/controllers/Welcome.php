@@ -1,8 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
-
+class Welcome extends MY_Controller {
+	function __construct(){
+	parent::__construct();
+	$this->load->helper('url');
+}
 	/**
 	 * Index Page for this controller.
 	 *
@@ -20,6 +23,9 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		// $this->load->view('welcome_message');
+		$this->data['some_text'] = "my some of text!";
+		$this->page = "templates/isi";
+		$this->layout();
 	}
 }

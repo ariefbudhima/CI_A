@@ -7,6 +7,7 @@ class login extends CI_Controller {
 
 		$this->load->helper('url');
 		$this->load->library('form_validation');
+		// $this->load->library('Layout');
 
 		$this->load->model('M_Laborat');
 		$this->load->model('M_radiologi');
@@ -14,6 +15,7 @@ class login extends CI_Controller {
 	}
 
 	public function index(){
+		// $this->page = "welcome_message";
 		$this->load->view('login/log');
 	}
 
